@@ -1,26 +1,171 @@
 @import "tailwindcss";
 
+/* Design tokens modelled on shapeofintelligence.com (colors, type scale, motion) */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Black & white palette */
+  --black: #000000;
+  --forest: #2b5243; /* brand accent */
+  --forest-deep: #1f3d32;
+  --night: #0a0a0a;
+  --carbon: #111111;
+  --white: #ffffff;
+  --silver: #b3b3b3;
+  --ink-2: #555555;
+  --hair-on-white: #0000001f;
+  --hair-on-carbon: #ffffff26;
+
+  --background: var(--white);
+  --foreground: var(--carbon);
+  --ease-out-2: cubic-bezier(.25, 1, .5, 1);
+  --ease-out-3: cubic-bezier(.22, 1, .36, 1);
+  --dur-reveal: .7s;
+  --dur-settle: .9s;
+  --tracking-display: -.02em;
+  --tracking-label: .1em;
+  --text-title: clamp(32px, 4.6vw, 72px);
+  --text-question: clamp(44px, 7vw, 128px);
+  --header-h: 64px;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-brand: var(--forest);
+  --color-brand-ink: var(--forest);
+  --color-brand-dark: var(--carbon);
+  --color-muted: var(--ink-2);
+  --color-soft: #f0f0f0;
+  --color-night: var(--night);
+  --color-silver: var(--silver);
+  --color-hair: var(--hair-on-white);
+  --font-sans: var(--font-sans-face);
+  --font-mono: var(--font-mono-face);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+html { scroll-behavior: smooth; }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans-face), "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+@media (min-width: 1024px) { body { font-size: 19px; } }
+
+h1, h2, h3 { letter-spacing: var(--tracking-display); font-weight: 500; line-height: 1.05; }
+h1 { font-size: var(--text-title); }
+h2 { font-size: clamp(28px, 3.4vw, 52px); }
+h3 { line-height: 1.2; }
+
+/* mono uppercase label */
+.label {
+  font-family: var(--font-mono-face), ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  font-weight: 400;
+}
+
+a { transition: color .2s var(--ease-out-3), text-decoration-color .15s var(--ease-out-2); }
+:focus-visible { outline: 2px solid var(--forest); outline-offset: 3px; }
+::selection { background: var(--forest); color: var(--white); }
+
+.container-x {
+  max-width: 1400px;
+  margin-inline: auto;
+  padding-inline: clamp(20px, 6vw, 96px);
+}
+
+/* hairlines */
+.hair { border-color: var(--hair-on-white); }
+.on-dark .hair, .on-dark { --hair: var(--hair-on-carbon); }
+
+/* buttons */
+.btn {
+  display: inline-block;
+  padding: .8em 1.4em;
+  border: 1px solid currentColor;
+  font-family: var(--font-mono-face), ui-monospace, monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  transition: background-color .2s var(--ease-out-3), color .2s var(--ease-out-3), border-color .2s var(--ease-out-3);
+}
+.btn-solid { background: var(--forest); border-color: var(--forest); color: var(--white); }
+.btn-solid:hover { background: var(--forest-deep); border-color: var(--forest-deep); }
+.btn-ghost { color: var(--carbon); }
+.btn-ghost:hover { background: var(--carbon); color: var(--white); }
+
+/* scroll reveal */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--dur-reveal) var(--ease-out-3), transform var(--dur-settle) var(--ease-out-3);
+}
+.js [data-reveal].is-in { opacity: 1; transform: none; }
+.js [data-reveal-stagger] > * {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--dur-reveal) var(--ease-out-3), transform var(--dur-settle) var(--ease-out-3);
+}
+.js [data-reveal-stagger].is-in > * { opacity: 1; transform: none; }
+.js [data-reveal-stagger].is-in > *:nth-child(2) { transition-delay: .08s; }
+.js [data-reveal-stagger].is-in > *:nth-child(3) { transition-delay: .16s; }
+.js [data-reveal-stagger].is-in > *:nth-child(4) { transition-delay: .24s; }
+.js [data-reveal-stagger].is-in > *:nth-child(5) { transition-delay: .32s; }
+.js [data-reveal-stagger].is-in > *:nth-child(6) { transition-delay: .4s; }
+
+/* card hover */
+.card { transition: border-color .2s var(--ease-out-3), transform .65s var(--ease-out-3), background-color .2s var(--ease-out-3); }
+.card:hover { border-color: var(--forest); transform: translateY(-4px); }
+
+/* images: black & white by default, real color on hover (header/footer logos excluded) */
+main img {
+  filter: grayscale(1);
+  transition: filter .6s var(--ease-out-3), transform .7s var(--ease-out-3), opacity .3s var(--ease-out-3);
+}
+main img:hover,
+main a:hover img,
+main figure:hover img,
+main a:focus-visible img {
+  filter: none;
+}
+
+/* FAQ accordion: plus/minus icon + smooth open (progressive: works without it) */
+.faq-icon::before,
+.faq-icon::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 14px;
+  height: 1.5px;
+  background: currentColor;
+  transform: translate(-50%, -50%);
+  transition: transform .35s var(--ease-out-3), opacity .25s var(--ease-out-3);
+}
+.faq-icon::after { transform: translate(-50%, -50%) rotate(90deg); }
+.faq-item[open] .faq-icon::after { transform: translate(-50%, -50%) rotate(0deg); opacity: 0; }
+.faq-item[open] summary span:nth-child(2) { color: var(--forest); }
+.faq-item[open] .faq-body { animation: faq-open .45s var(--ease-out-3); }
+@keyframes faq-open { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.animate-marquee { animation: marquee 40s linear infinite; }
+/* hero entrance + rotating word (CSS only; content is visible without JS) */
+@keyframes hero-in { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+.hero-in { animation: hero-in var(--dur-reveal) var(--ease-out-3) both; }
+@keyframes word-in { from { opacity: 0; transform: translateY(.4em); } to { opacity: 1; transform: none; } }
+.word-in { animation: word-in .5s var(--ease-out-3) both; }
+@keyframes blink { 50% { opacity: 0; } }
+.caret { animation: blink 1s step-end infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .animate-marquee, .caret, .hero-in, .word-in, .faq-item[open] .faq-body { animation: none; }
+  .faq-icon::before, .faq-icon::after { transition: none; }
+  .js [data-reveal], .js [data-reveal-stagger] > * { opacity: 1; transform: none; transition: none; }
+  .card:hover { transform: none; }
 }
