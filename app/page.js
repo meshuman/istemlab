@@ -7,9 +7,8 @@ import Expertise from "@/components/Expertise";
 import Team from "@/components/Team";
 import CTA from "@/components/CTA";
 import FAQ from "@/components/FAQ";
-import BlogCard from "@/components/BlogCard";
+import LearnSections from "@/components/LearnSections";
 import { differentiators, process } from "@/lib/site";
-import { posts } from "@/lib/content";
 
 export default function Home() {
   return (
@@ -63,20 +62,28 @@ export default function Home() {
       </section>
 
       <Team />
-      <section className="bg-soft py-24">
+      <section className="border-t border-hair py-24" aria-labelledby="learn-heading">
         <div data-reveal suppressHydrationWarning className="container-x">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
-              <p className="label text-brand-ink">Insights</p>
-              <h2 className="mt-3">Recent articles</h2>
+              <p className="label text-brand-ink">Free to read</p>
+              <h2 id="learn-heading" className="mt-3">Learn</h2>
+              <p className="mt-4 max-w-[58ch] text-muted">
+                Concepts, tutorials and guides from the team that builds this technology every day. Free to read,
+                practical to use.
+              </p>
             </div>
-            <Link href="/blogs" className="btn btn-ghost">All articles</Link>
+            <Link href="/learn" className="btn btn-ghost">Explore Learn</Link>
           </div>
-          <div data-reveal-stagger suppressHydrationWarning className="mt-12 grid gap-6 md:grid-cols-3">
-            {posts.slice(0, 3).map((p) => (
-              <BlogCard key={p.slug} post={p} />
-            ))}
-          </div>
+
+          <LearnSections className="mt-12" />
+
+          <p className="mt-8 text-[15px] text-muted">
+            Not sure where to start?{" "}
+            <Link href="/learn/paths" className="font-medium text-foreground underline underline-offset-4 hover:text-brand-ink">
+              Follow a learning path →
+            </Link>
+          </p>
         </div>
       </section>
       <FAQ />

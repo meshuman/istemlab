@@ -1,6 +1,7 @@
 import Image from "next/image";
 import PageHero from "@/components/PageHero";
 import CTA from "@/components/CTA";
+import Businesses from "@/components/Businesses";
 import Work from "@/components/Work";
 import { clientSites, otherProjects, pageMeta } from "@/lib/site";
 
@@ -57,6 +58,7 @@ export default function WorkPage() {
           </div>
         </div>
       </section>
+      <Businesses />
       <CTA />
     </>
   );

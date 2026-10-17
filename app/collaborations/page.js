@@ -14,6 +14,7 @@ export default function Collaborations() {
     <>
       <PageHero
         title="Collaborations"
+        crumbs={["Company"]}
         intro="The best AI projects are built together. We partner with universities, research institutes, development organizations and companies on research, pilots and long-term programs."
       />
       <Partners />

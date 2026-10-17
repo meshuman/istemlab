@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import SocialLinks from "./SocialIcons";
 import { SITE, services } from "@/lib/site";
 
 export default function Footer() {
@@ -12,9 +13,7 @@ export default function Footer() {
             Applied AI and geospatial intelligence, built to deliver. GeoAI,
             RAG and agents, 3D/VR, AI strategy and training.
           </p>
-          <a href={SITE.linkedin} target="_blank" rel="noreferrer" className="label mt-4 inline-block py-2 hover:text-white">
-            LinkedIn ↗
-          </a>
+          <SocialLinks tone="dark" className="mt-6" />
         </div>
 
         <div>
@@ -36,10 +35,9 @@ export default function Footer() {
             <li><Link href="/about" className="hover:text-white">About us</Link></li>
             <li><Link href="/work" className="hover:text-white">Our work</Link></li>
             <li><Link href="/research" className="hover:text-white">Research</Link></li>
-            <li><Link href="/experiences" className="hover:text-white">Experiences</Link></li>
+            <li><Link href="/collaborations" className="hover:text-white">Collaborations</Link></li>
             <li><Link href="/learn" className="hover:text-white">Learn</Link></li>
             <li><Link href="/careers" className="hover:text-white">Careers</Link></li>
-            <li><Link href="/blogs" className="hover:text-white">Blog</Link></li>
             <li><Link href="/privacy-policy" className="hover:text-white">Privacy policy</Link></li>
           </ul>
         </div>

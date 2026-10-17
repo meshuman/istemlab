@@ -50,12 +50,14 @@ function MegaPanel({ item, open, pathname, id }) {
         open ? "visible translate-y-0 opacity-100" : "invisible -translate-y-1 opacity-0"
       }`}
     >
-      <div className="container-x grid grid-cols-[repeat(2,minmax(0,22rem))] gap-x-16 py-8">
-        {columns.map((col) => (
-          <div key={col.title}>
+      <div className="container-x flex gap-x-16 py-8">
+        {columns.map((col) => {
+          const cta = col.links.find((l) => l.cta);
+          return (
+          <div key={col.title} className={col.wide ? "w-[44rem] max-w-full" : "w-[22rem]"}>
             <p className="label text-[11px] text-muted">{col.title}</p>
-            <ul className="mt-3">
-              {col.links.map((l) => {
+            <ul className={`mt-3 ${col.wide ? "grid grid-cols-2 gap-x-8" : ""}`}>
+              {col.links.filter((l) => !l.cta).map((l) => {
                 const active = linkActive(pathname, l.href);
                 return (
                   <li key={l.href + l.label}>
@@ -79,8 +81,18 @@ function MegaPanel({ item, open, pathname, id }) {
                 );
               })}
             </ul>
+            {cta && (
+              <Link
+                href={cta.href}
+                className="label mt-4 flex items-center justify-between border-t border-hair pt-4 text-brand-ink hover:underline"
+              >
+                <span>{cta.label}</span>
+                <span aria-hidden="true">→</span>
+              </Link>
+            )}
           </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

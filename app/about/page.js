@@ -2,6 +2,7 @@ import PageHero from "@/components/PageHero";
 import Team from "@/components/Team";
 import FAQ from "@/components/FAQ";
 import CTA from "@/components/CTA";
+import Advisors from "@/components/Advisors";
 import Image from "next/image";
 import { differentiators, pageMeta } from "@/lib/site";
 import { values } from "@/lib/content";
@@ -92,6 +93,7 @@ export default function About() {
         </div>
       </section>
       <Team />
+      <Advisors className="bg-soft py-24" />
       <FAQ />
       <CTA />
     </>

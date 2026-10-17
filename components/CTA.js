@@ -20,8 +20,8 @@ export default function CTA({
           >
             Book a discovery call
           </Link>
-          <a href={`mailto:${SITE.email}`} className="label inline-block py-2 text-white/70 hover:text-white">
-            or email {SITE.email}
+          <a href={`mailto:${SITE.formEmail}`} className="label inline-block py-2 text-white/70 hover:text-white">
+            or email {SITE.formEmail}
           </a>
         </div>
       </div>

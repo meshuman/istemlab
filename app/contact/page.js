@@ -1,7 +1,9 @@
 import PageHero from "@/components/PageHero";
 import JsonLd from "@/components/JsonLd";
 import FAQ from "@/components/FAQ";
+import ContactForm from "@/components/ContactForm";
 import LocationMap from "@/components/LocationMap";
+import SocialLinks from "@/components/SocialIcons";
 import { pageMeta, services, SITE } from "@/lib/site";
 
 export const metadata = pageMeta(
@@ -15,8 +17,6 @@ const steps = [
   ["We hold a discovery call", "30 minutes to understand your context, data and constraints."],
   ["You get a clear proposal", "A scoped first phase with timeline, deliverables and cost."],
 ];
-
-const field = "mt-1 w-full border border-hair bg-transparent px-4 py-3 focus:border-brand-ink";
 
 export default function Contact() {
   return (
@@ -56,46 +56,13 @@ export default function Contact() {
               <p><span className="label text-muted">Email</span><br /><a className="text-brand-ink" href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
               <p><span className="label text-muted">Phone</span><br /><a className="text-brand-ink" href={`tel:${SITE.phone}`}>{SITE.phoneDisplay}</a></p>
             </address>
+            <div className="mt-8">
+              <p className="label mb-3 text-muted">Follow us</p>
+              <SocialLinks />
+            </div>
           </div>
 
-          <form className="space-y-5" action={`mailto:${SITE.email}`} method="post" encType="text/plain">
-            <div className="grid gap-5 sm:grid-cols-2">
-              <label className="block text-sm font-medium">
-                Name
-                <input name="name" required autoComplete="name" className={field} />
-              </label>
-              <label className="block text-sm font-medium">
-                Work email
-                <input name="email" type="email" required autoComplete="email" className={field} />
-              </label>
-            </div>
-            <label className="block text-sm font-medium">
-              Organization
-              <input name="organization" autoComplete="organization" className={field} />
-            </label>
-            <label className="block text-sm font-medium">
-              What can we help with?
-              <select name="service" className={field} defaultValue="">
-                <option value="" disabled>Choose a service</option>
-                {services.map((s) => (
-                  <option key={s.slug} value={s.title}>{s.title}</option>
-                ))}
-                <option value="Not sure yet">Not sure yet</option>
-              </select>
-            </label>
-            <label className="block text-sm font-medium">
-              Tell us about your goal
-              <textarea
-                name="message"
-                rows={5}
-                required
-                placeholder="What are you trying to achieve, and by when?"
-                className={field}
-              />
-            </label>
-            <button className="btn btn-solid">Request discovery call</button>
-            <p className="text-xs text-muted">We reply within two business days. We never share your details.</p>
-          </form>
+          <ContactForm to={SITE.formEmail} services={services} />
         </div>
       </section>
       <LocationMap />

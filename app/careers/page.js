@@ -51,7 +51,7 @@ export default function Careers() {
             {jobs.map((j) => (
               <li key={j.title}>
                 <a
-                  href={`mailto:${SITE.email}?subject=${encodeURIComponent(`Application: ${j.title}`)}`}
+                  href={`mailto:${SITE.formEmail}?subject=${encodeURIComponent(`Application: ${j.title}`)}`}
                   className="group grid gap-2 py-6 md:grid-cols-[1.5fr_1fr_auto] md:items-center md:gap-8"
                 >
                   <div>
@@ -70,7 +70,7 @@ export default function Careers() {
               Send us your resume and portfolio anyway. We will keep you on our
               radar for future roles that match your expertise.
             </p>
-            <a href={`mailto:${SITE.email}?subject=General application`} className="btn btn-solid mt-6">
+            <a href={`mailto:${SITE.formEmail}?subject=General application`} className="btn btn-solid mt-6">
               Send your resume
             </a>
           </div>

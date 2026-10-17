@@ -56,7 +56,7 @@ export default function LocationMap() {
                 >
                   Directions ↗
                 </a>
-                <a href={`mailto:${SITE.email}`} className="btn btn-ghost !px-4 !py-2">
+                <a href={`mailto:${SITE.formEmail}`} className="btn btn-ghost !px-4 !py-2">
                   Email us
                 </a>
               </div>

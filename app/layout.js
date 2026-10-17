@@ -4,7 +4,8 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
-import { SITE } from "@/lib/site";
+import { SITE, SOCIALS, services } from "@/lib/site";
+import { team } from "@/lib/content";
 
 const sans = Hanken_Grotesk({
   variable: "--font-sans-face",
@@ -50,11 +51,18 @@ const orgSchema = {
       description: SITE.description,
       legalName: SITE.legalName,
       logo: `${SITE.url}/logo-black.png`,
-      sameAs: [SITE.linkedin],
+      sameAs: [SITE.linkedin, ...SOCIALS.map((s) => s.url).filter(Boolean)].filter((u, i, a) => a.indexOf(u) === i),
       email: SITE.email,
       telephone: SITE.phone,
+      areaServed: "Worldwide",
+      address: { "@type": "PostalAddress", addressCountry: "NP" },
+      geo: { "@type": "GeoCoordinates", latitude: SITE.location.lat, longitude: SITE.location.lng },
+      hasMap: SITE.mapUrl,
+      knowsAbout: ["GeoAI", "Geospatial analysis", "Remote sensing", "Retrieval-augmented generation", "Autonomous AI agents", "AI strategy and training", "3D, VR and mixed reality", "Gaussian splatting", "Digital twins"],
+      contactPoint: { "@type": "ContactPoint", contactType: "sales", email: SITE.email, telephone: SITE.phone, availableLanguage: ["English", "Nepali"] },
+      employee: team.map((m) => ({ "@type": "Person", name: m.name, jobTitle: m.role })),
     },
-    { "@type": "WebSite", "@id": `${SITE.url}/#website`, url: SITE.url, name: SITE.name, publisher: { "@id": `${SITE.url}/#org` } },
+    { "@type": "WebSite", "@id": `${SITE.url}/#website`, url: SITE.url, name: SITE.name, publisher: { "@id": `${SITE.url}/#org` }, inLanguage: "en" },
   ],
 };
 

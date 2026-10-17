@@ -1,4 +1,5 @@
 import PageHero from "@/components/PageHero";
+import Advisors from "@/components/Advisors";
 import { pageMeta, SITE } from "@/lib/site";
 
 export const metadata = pageMeta(
@@ -11,23 +12,34 @@ export default function Advisor() {
   return (
     <>
       <PageHero
-        title="Become an Advisor"
-        intro="Help a fast-growing AI team make better decisions. Our advisors are experienced professionals in AI, geospatial science and business who give a few hours a month to mentoring and strategy."
+        title="Our advisors"
+        intro="Experienced professionals in AI, geospatial science, tourism and business who give their time to mentor our team and help shape our direction."
         crumbs={["Join us"]}
       />
-      <section className="py-16">
+      <Advisors
+        className="pb-24"
+        eyebrow="The advisory circle"
+        title="Guided by people who have done it"
+      />
+      <section className="bg-soft py-20">
         <div data-reveal suppressHydrationWarning className="container-x max-w-3xl">
-          <h2 className="text-2xl font-medium">What advisors do</h2>
+          <p className="label text-brand-ink">Join them</p>
+          <h2 className="mt-3 !text-[clamp(26px,2.6vw,38px)]">Become an advisor</h2>
+          <p className="mt-3 text-muted">
+            Advisors give a few hours a month. If you have experience in AI, geospatial science, 3D and immersive
+            technology or building ventures, we would like to hear from you.
+          </p>
+          <h3 className="label mt-8 text-muted">What advisors do</h3>
           <ul className="mt-4 list-disc space-y-2 pl-5 text-muted">
             <li>Mentor engineers and researchers</li>
             <li>Open doors to partners and funding</li>
             <li>Review technical and business strategy</li>
           </ul>
           <a
-            href={`mailto:${SITE.email}?subject=Advisor inquiry`}
+            href={`mailto:${SITE.formEmail}?subject=Advisor inquiry`}
             className="mt-8 inline-block btn btn-solid"
           >
-            Get in touch
+            Become an advisor
           </a>
         </div>
       </section>

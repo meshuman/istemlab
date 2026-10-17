@@ -1,12 +1,17 @@
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema, orgRef } from "@/lib/schema";
 import LearnBody, { slugify } from "@/components/LearnBody";
 import LearnCard from "@/components/LearnCard";
+import PathAware from "@/components/PathAware";
 import { formatDate } from "@/components/BlogCard";
+import ShareLinks from "@/components/ShareLinks";
+import Comments from "@/components/Comments";
 import CTA from "@/components/CTA";
 import { SITE } from "@/lib/site";
-import { learnItems, getItem, getType, toCards } from "@/lib/learn";
+import { learnItems, getItem, getType, toCards, pathMemberships } from "@/lib/learn";
 
 // Every valid address is prerendered at build time via generateStaticParams (unknown ones 404),
 // so these pages may block on navigation instead of streaming behind <Suspense>.
@@ -31,7 +36,9 @@ export async function generateMetadata({ params }) {
       type: "article",
       publishedTime: item.date,
       url: `${SITE.url}${path}`,
+      images: [`${SITE.url}${item.image}`],
     },
+    twitter: { card: "summary_large_image", title: item.title, description: item.excerpt, images: [`${SITE.url}${item.image}`] },
   };
 }
 
@@ -41,26 +48,46 @@ export default async function LearnArticle({ params }) {
   if (!item) notFound();
 
   const t = getType(item.type);
+  const memberships = pathMemberships(item.slug);
   const toc = item.body.filter((b) => b.t === "h2");
   const related = toCards(
     learnItems.filter((i) => i.slug !== item.slug && (i.topic === item.topic || i.type === item.type)).slice(0, 3)
   );
   const path = `/learn/${item.type}/${item.slug}`;
+  const faq = item.body.filter((b) => b.t === "qa").flatMap((b) => b.items);
 
   return (
     <>
+      {faq.length > 0 && (
+        <JsonLd
+          data={{
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: faq.map((x) => ({ "@type": "Question", name: x.q, acceptedAnswer: { "@type": "Answer", text: x.a } })),
+          }}
+        />
+      )}
+      <JsonLd data={breadcrumbSchema([["Home", "/"], ["Learn", "/learn"], [t.label, `/learn/${t.slug}`], [item.title, path]])} />
       <JsonLd
         data={{
           "@context": "https://schema.org",
           "@type": "TechArticle",
           headline: item.title,
           description: item.excerpt,
+          abstract: item.takeaways?.join(" "),
           datePublished: item.date,
+          dateModified: item.date,
+          inLanguage: "en",
+          isAccessibleForFree: true,
           proficiencyLevel: item.level,
           articleSection: t.label,
-          author: { "@type": "Organization", name: SITE.name },
-          publisher: { "@type": "Organization", name: SITE.name, url: SITE.url },
-          mainEntityOfPage: `${SITE.url}${path}`,
+          keywords: [item.topic, ...(memberships || []).map((m) => m.title)].filter(Boolean).join(", "),
+          timeRequired: `PT${item.minutes}M`,
+          image: `${SITE.url}${item.image}`,
+          author: orgRef,
+          publisher: orgRef,
+          mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE.url}${path}` },
+          speakable: { "@type": "SpeakableSpecification", cssSelector: ["h1", "#takeaways"] },
         }}
       />
 
@@ -81,7 +108,14 @@ export default async function LearnArticle({ params }) {
             <span>{item.minutes} min read</span>
             <time dateTime={item.date}>{formatDate(item.date)}</time>
           </p>
+          {memberships.length > 0 && <PathAware memberships={memberships} variant="top" />}
         </header>
+
+        <div data-reveal suppressHydrationWarning className="container-x mt-12">
+          <div className="relative aspect-[21/9] overflow-hidden bg-soft">
+            <Image src={item.image} alt="" fill priority sizes="100vw" className="object-cover" />
+          </div>
+        </div>
 
         <div className="container-x mt-12 grid gap-12 lg:grid-cols-[220px_minmax(0,1fr)]">
           {/* Table of contents */}
@@ -124,11 +158,20 @@ export default async function LearnArticle({ params }) {
             <div className="mt-10">
               <LearnBody blocks={item.body} />
             </div>
+            <ShareLinks title={item.title} path={path} className="mt-12" />
+            <Comments className="mt-12" />
           </div>
         </div>
       </article>
 
-      {related.length > 0 && (
+      {memberships.length > 0 ? (
+        <section className="bg-soft py-20">
+          <div data-reveal suppressHydrationWarning className="container-x">
+            <PathAware memberships={memberships} variant="keep" />
+          </div>
+        </section>
+      ) : (
+      related.length > 0 && (
         <section className="bg-soft py-20">
           <div data-reveal suppressHydrationWarning className="container-x">
             <h2 className="!text-3xl">Keep learning</h2>
@@ -141,6 +184,7 @@ export default async function LearnArticle({ params }) {
             </ul>
           </div>
         </section>
+            )
       )}
 
       <CTA

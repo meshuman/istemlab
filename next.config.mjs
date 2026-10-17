@@ -5,12 +5,12 @@ const isProd = process.env.NODE_ENV === "production";
 // Dev needs 'unsafe-eval' for hot reload, so the CSP is only enforced in production.
 const csp = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline'",
+  "script-src 'self' 'unsafe-inline' https://giscus.app",
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob:",
   "font-src 'self' data:",
   "connect-src 'self'",
-  "frame-src https://www.google.com",
+  "frame-src https://www.google.com https://giscus.app",
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'self' mailto:",
@@ -39,6 +39,22 @@ const nextConfig = {
   reactStrictMode: true,
   cacheComponents: true,
   partialPrefetching: true,
+  async redirects() {
+    return [
+      { source: "/learn/experiences/start-with-the-decision-not-the-dashboard", destination: "/learn/experiences", permanent: true },
+      { source: "/experiences/start-with-the-decision-not-the-dashboard", destination: "/learn/experiences", permanent: true },
+      { source: "/learn/experiences/scoping-a-marketplace-mvp", destination: "/learn/experiences", permanent: true },
+      { source: "/experiences/scoping-a-marketplace-mvp", destination: "/learn/experiences", permanent: true },
+      { source: "/learn/experiences/keeping-a-field-platform-running", destination: "/learn/experiences", permanent: true },
+      { source: "/experiences/keeping-a-field-platform-running", destination: "/learn/experiences", permanent: true },
+      { source: "/learn/experiences/from-research-model-to-production", destination: "/learn/experiences", permanent: true },
+      { source: "/experiences/from-research-model-to-production", destination: "/learn/experiences", permanent: true },
+      { source: "/blogs", destination: "/learn", permanent: true },
+      { source: "/blogs/:slug", destination: "/learn", permanent: true },
+      { source: "/experiences", destination: "/learn/experiences", permanent: true },
+      { source: "/experiences/:slug", destination: "/learn/experiences/:slug", permanent: true },
+    ];
+  },
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },

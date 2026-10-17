@@ -42,6 +42,33 @@ export default function LearnBody({ blocks }) {
                 ))}
               </ol>
             );
+          case "qa":
+            return (
+              <dl key={n} className="divide-y divide-hair border-y border-hair">
+                {b.items.map((x) => (
+                  <div key={x.q} className="py-5">
+                    <dt className="text-[19px] font-medium leading-snug">{x.q}</dt>
+                    <dd className="mt-2 text-muted">{x.a}</dd>
+                  </div>
+                ))}
+              </dl>
+            );
+          case "formula":
+            return (
+              <figure key={n} className="border border-hair bg-soft p-6">
+                <p className="overflow-x-auto text-center font-mono text-[clamp(16px,2vw,22px)] leading-relaxed">{b.text}</p>
+                {b.legend.length > 0 && (
+                  <figcaption className="mt-5 border-t border-hair pt-4 text-[15px] text-muted">
+                    <span className="label mb-2 block text-[11px]">Where</span>
+                    <ul className="space-y-1">
+                      {b.legend.map((x) => (
+                        <li key={x}>{x}</li>
+                      ))}
+                    </ul>
+                  </figcaption>
+                )}
+              </figure>
+            );
           case "code":
             return <CodeBlock key={n} code={b.text} lang={b.lang} />;
           case "callout":

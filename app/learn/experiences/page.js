@@ -3,11 +3,12 @@ import ContentList from "@/components/ContentList";
 import CTA from "@/components/CTA";
 import { pageMeta } from "@/lib/site";
 import { experiences } from "@/lib/experiences";
+import { readingMinutes } from "@/lib/readtime";
 
 export const metadata = pageMeta(
   "Experiences | Lessons from Planning & Running AI Projects",
   "What we learned planning and operationalizing GeoAI, data platform and product projects: practical lessons from I.STEM Lab's engagements.",
-  "/experiences"
+  "/learn/experiences"
 );
 
 // Send only what the list needs to the browser (not full article bodies),
@@ -20,6 +21,7 @@ const items = experiences.map((e) => ({
   excerpt: e.excerpt,
   date: e.date,
   image: e.image,
+  minutes: readingMinutes(e),
   hay: [e.title, e.excerpt, e.project, e.phase, ...e.takeaways].join(" ").toLowerCase(),
 }));
 
@@ -28,8 +30,8 @@ export default function Experiences() {
     <>
       <PageHero
         title="Experiences"
-        intro="Honest notes from the field: what we learned while planning and operationalizing projects, shared so your next project goes smoother."
-        crumbs={["Company"]}
+        intro="Practical lessons from planning and running AI, GeoAI and immersive 3D projects: what to ask, what to avoid and what to do next, shared so your own project goes smoother."
+        crumbs={["Learn"]}
       />
 
       <section className="pb-24" aria-label="Experiences">

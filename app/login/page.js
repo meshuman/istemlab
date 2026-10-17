@@ -21,7 +21,7 @@ export default function Login() {
             we will get back to you the same business day.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
-            <a href={`mailto:${SITE.email}`} className="btn btn-solid">Email us</a>
+            <a href={`mailto:${SITE.formEmail}`} className="btn btn-solid">Email us</a>
             <Link href="/contact" className="btn btn-ghost">Contact page</Link>
           </div>
         </div>

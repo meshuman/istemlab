@@ -3,7 +3,8 @@ import PageHero from "@/components/PageHero";
 import ContentList from "@/components/ContentList";
 import CTA from "@/components/CTA";
 import { pageMeta } from "@/lib/site";
-import { learnTypes, learnItems, learnPaths, itemsOfType, toCards, getItem, getType } from "@/lib/learn";
+import { learnItems, learnPaths, toCards, getType } from "@/lib/learn";
+import LearnSections from "@/components/LearnSections";
 
 export const metadata = pageMeta(
   "Learn | GeoAI, RAG & AI Tutorials, Concepts and Guides",
@@ -25,18 +26,8 @@ export default function Learn() {
 
       {/* Content types */}
       <section className="pb-20">
-        <div data-reveal-stagger suppressHydrationWarning className="container-x grid gap-6 md:grid-cols-3">
-          {learnTypes.map((t, n) => (
-            <Link key={t.slug} href={`/learn/${t.slug}`} className="card group flex flex-col border border-hair p-7">
-              <span className="label text-muted">0{n + 1}</span>
-              <h2 className="mt-6 !text-[clamp(26px,2.4vw,36px)] group-hover:text-brand-ink">{t.label}</h2>
-              <p className="mt-3 text-[15px] text-muted">{t.blurb}</p>
-              <p className="label mt-auto flex items-center justify-between pt-8 text-muted">
-                <span>{itemsOfType(t.slug).length} {itemsOfType(t.slug).length === 1 ? "article" : "articles"}</span>
-                <span className="text-brand-ink">Browse →</span>
-              </p>
-            </Link>
-          ))}
+        <div className="container-x">
+          <LearnSections />
         </div>
       </section>
 
@@ -48,11 +39,17 @@ export default function Learn() {
           <p className="mt-4 max-w-[56ch] text-muted">
             Not sure where to begin? Follow a path: each is a short, ordered set of articles that builds on the one before.
           </p>
-          <div data-reveal-stagger suppressHydrationWarning className="mt-12 grid gap-6 lg:grid-cols-3">
+          <div data-reveal-stagger suppressHydrationWarning className="mt-12 grid gap-6 lg:grid-cols-2">
             {learnPaths.map((p) => (
               <div key={p.slug} className="flex flex-col border border-hair bg-background p-7">
-                <h3 className="text-xl">{p.title}</h3>
-                <p className="mt-2 text-[15px] text-muted">{p.blurb}</p>
+                <h3 className="text-xl"><Link href={`/learn/paths/${p.slug}`} className="hover:text-brand-ink">{p.title}</Link></h3>
+                <p className="label mt-2 text-[11px] text-brand-ink">
+                  {p.items.length} articles · {p.items.reduce((n, s) => n + (byId(s)?.minutes || 0), 0)} min in total
+                </p>
+                <p className="mt-3 text-[15px] text-muted">{p.blurb}</p>
+                <p className="mt-2 text-[13px] text-muted">
+                  <span className="font-medium text-foreground">Best for:</span> {p.audience}
+                </p>
                 <ol className="mt-6 divide-y divide-hair border-y border-hair">
                   {p.items.map((slug, i) => {
                     const it = byId(slug);
@@ -60,7 +57,7 @@ export default function Learn() {
                     return (
                       <li key={slug}>
                         <Link
-                          href={`/learn/${it.type}/${it.slug}`}
+                          href={`/learn/${it.type}/${it.slug}?path=${p.slug}`}
                           className="group flex items-start gap-3 py-3"
                         >
                           <span className="label mt-1 w-5 shrink-0 text-brand-ink">{i + 1}</span>
@@ -75,8 +72,14 @@ export default function Learn() {
                     );
                   })}
                 </ol>
+                <Link href={`/learn/paths/${p.slug}`} className="btn btn-ghost mt-6 self-start">
+                  View the full path
+                </Link>
               </div>
             ))}
+          </div>
+          <div className="mt-10">
+            <Link href="/learn/paths" className="btn btn-solid">See all learning paths</Link>
           </div>
         </div>
       </section>
