@@ -6,7 +6,7 @@ import { learnPaths, pathItems, pathStats } from "@/lib/learn";
 
 export const metadata = pageMeta(
   "Learning Paths | GeoAI, RAG, AI Adoption, 3D & VR",
-  "Step-by-step learning paths from I.STEM Lab: GeoAI from zero, the maths and science behind AI, building a trusted RAG assistant, adopting AI and immersive 3D, VR and AR.",
+  "Seven free, step-by-step learning paths: GeoAI, applied maths, tech jargon, the science behind AI, RAG assistants, adopting AI, and 3D, VR and AR.",
   "/learn/paths"
 );
 

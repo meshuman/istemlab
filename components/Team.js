@@ -23,7 +23,7 @@ export default function Team() {
               by a love of hard problems in AI and geospatial technology.
             </p>
           </div>
-          <Link href="/careers" className="btn btn-ghost">We are hiring</Link>
+          <Link href="/careers" className="btn btn-ghost">Careers</Link>
         </div>
 
         <div data-reveal-stagger suppressHydrationWarning className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">

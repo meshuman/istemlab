@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import JsonLd from "@/components/JsonLd";
+import { seo, snippet } from "@/lib/seo";
 import { breadcrumbSchema, orgRef } from "@/lib/schema";
 import LearnBody, { slugify } from "@/components/LearnBody";
 import LearnCard from "@/components/LearnCard";
@@ -26,19 +27,20 @@ export async function generateMetadata({ params }) {
   const item = getItem(type, slug);
   if (!item) return {};
   const path = `/learn/${item.type}/${item.slug}`;
+  const meta = { title: seo[item.slug]?.title || item.title, description: seo[item.slug]?.description || snippet(item.excerpt) };
   return {
-    title: item.title,
-    description: item.excerpt,
+    title: meta.title,
+    description: meta.description,
     alternates: { canonical: path },
     openGraph: {
-      title: item.title,
-      description: item.excerpt,
+      title: meta.title,
+      description: meta.description,
       type: "article",
       publishedTime: item.date,
       url: `${SITE.url}${path}`,
       images: [`${SITE.url}${item.image}`],
     },
-    twitter: { card: "summary_large_image", title: item.title, description: item.excerpt, images: [`${SITE.url}${item.image}`] },
+    twitter: { card: "summary_large_image", title: meta.title, description: meta.description, images: [`${SITE.url}${item.image}`] },
   };
 }
 

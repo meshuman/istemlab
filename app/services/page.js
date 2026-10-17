@@ -4,6 +4,27 @@ import JsonLd from "@/components/JsonLd";
 import FAQ from "@/components/FAQ";
 import CTA from "@/components/CTA";
 import { services, process, SITE, pageMeta } from "@/lib/site";
+import { learnItems, getPath } from "@/lib/learn";
+
+// Free learning material related to each service: one learning path, then two articles.
+const related = {
+  "geo-ai": ["geoai-from-zero", "geoai-in-plain-language", "resolution-in-satellite-imagery"],
+  "ai-strategy-development": ["adopt-ai", "ai-readiness-checklist", "your-first-ai-pilot"],
+  "data-systems-ai-systems": ["rag-to-trusted-assistant", "rag-explained", "ai-agents-explained"],
+  "3d-vr-mixed-reality": ["immersive-3d-vr-ar", "gaussian-splatting-explained", "vr-ar-mixed-reality-explained"],
+  "business-incubation": ["tech-jargon-decoded", "validate-a-startup-idea", "your-first-ai-pilot"],
+};
+const relatedLinks = (slug) => {
+  const [pathSlug, ...articles] = related[slug] || [];
+  const path = pathSlug && getPath(pathSlug);
+  return [
+    ...(path ? [{ href: `/learn/paths/${path.slug}`, label: `Learning path: ${path.title}` }] : []),
+    ...articles
+      .map((a) => learnItems.find((i) => i.slug === a))
+      .filter(Boolean)
+      .map((i) => ({ href: `/learn/${i.type}/${i.slug}`, label: i.title })),
+  ];
+};
 
 export const metadata = pageMeta(
   "AI & GeoAI Services: Strategy, RAG, Agents, 3D/VR",
@@ -74,6 +95,20 @@ export default function Services() {
                     <dd className="mt-2 text-[15px]">{s.forWho}</dd>
                   </div>
                 </dl>
+                {relatedLinks(s.slug).length > 0 && (
+                  <div className="mt-8">
+                    <h3 className="label text-muted">Learn more, free</h3>
+                    <ul className="mt-3 space-y-2">
+                      {relatedLinks(s.slug).map((l) => (
+                        <li key={l.href}>
+                          <Link href={l.href} className="text-[15px] text-brand-ink underline-offset-4 hover:underline">
+                            {l.label} →
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
                 <Link href={`/contact?service=${s.slug}`} className="btn btn-solid mt-8">
                   Discuss {s.title.split(" (")[0]}
                 </Link>

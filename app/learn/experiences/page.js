@@ -6,8 +6,8 @@ import { experiences } from "@/lib/experiences";
 import { readingMinutes } from "@/lib/readtime";
 
 export const metadata = pageMeta(
-  "Experiences | Lessons from Planning & Running AI Projects",
-  "What we learned planning and operationalizing GeoAI, data platform and product projects: practical lessons from I.STEM Lab's engagements.",
+  "Experiences: Lessons from Running AI Projects",
+  "Practical lessons for planning, estimating and running AI and GeoAI projects: questions to ask, data problems, adoption, monitoring and remote teams.",
   "/learn/experiences"
 );
 
@@ -36,6 +36,7 @@ export default function Experiences() {
 
       <section className="pb-24" aria-label="Experiences">
         <div data-reveal suppressHydrationWarning className="container-x">
+          <h2 className="sr-only">All experiences</h2>
           <ContentList
             items={items}
             variant="experience"

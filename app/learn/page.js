@@ -7,7 +7,7 @@ import { learnItems, learnPaths, toCards, getType } from "@/lib/learn";
 import LearnSections from "@/components/LearnSections";
 
 export const metadata = pageMeta(
-  "Learn | GeoAI, RAG & AI Tutorials, Concepts and Guides",
+  "Learn GeoAI, RAG and AI: Free Guides and Tutorials",
   "Free learning material from I.STEM Lab: plain-language concepts, hands-on tutorials and practical guides on GeoAI, RAG, AI agents and AI adoption.",
   "/learn"
 );
@@ -27,6 +27,7 @@ export default function Learn() {
       {/* Content types */}
       <section className="pb-20">
         <div className="container-x">
+          <h2 className="sr-only">Sections</h2>
           <LearnSections />
         </div>
       </section>

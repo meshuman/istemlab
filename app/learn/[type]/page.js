@@ -31,6 +31,7 @@ export default async function LearnType({ params }) {
       <PageHero title={t.label} intro={t.long} crumbs={["Learn"]} />
       <section className="pb-24">
         <div data-reveal suppressHydrationWarning className="container-x">
+          <h2 className="sr-only">All {t.label.toLowerCase()}</h2>
           <ContentList
             items={cards}
             variant="learn"

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import JsonLd from "@/components/JsonLd";
+import { seo, snippet } from "@/lib/seo";
 import ExperienceCard from "@/components/ExperienceCard";
 import LearnBody, { slugify } from "@/components/LearnBody";
 import { formatDate } from "@/components/BlogCard";
@@ -24,13 +25,14 @@ export async function generateMetadata({ params }) {
   const { slug } = await params;
   const item = experiences.find((e) => e.slug === slug);
   if (!item) return {};
+  const meta = { title: seo[item.slug]?.title || item.title, description: seo[item.slug]?.description || snippet(item.excerpt) };
   return {
-    title: item.title,
-    description: item.excerpt,
+    title: meta.title,
+    description: meta.description,
     alternates: { canonical: `/learn/experiences/${item.slug}` },
     openGraph: {
-      title: item.title,
-      description: item.excerpt,
+      title: meta.title,
+      description: meta.description,
       type: "article",
       publishedTime: item.date,
       url: `${SITE.url}/learn/experiences/${item.slug}`,

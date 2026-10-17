@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import JsonLd from "@/components/JsonLd";
+import { pathTitles } from "@/lib/seo";
 import { breadcrumbSchema, orgRef } from "@/lib/schema";
 import CTA from "@/components/CTA";
 import { pageMeta, SITE } from "@/lib/site";
@@ -19,8 +20,8 @@ export async function generateMetadata({ params }) {
   if (!path) return {};
   const { count, minutes } = pathStats(path);
   return pageMeta(
-    `${path.title} | Learning path`,
-    `${path.blurb} ${count} articles, about ${minutes} minutes in total. Best for: ${path.audience}.`,
+    pathTitles[path.slug] || path.title,
+    `Free learning path, ${count} articles (about ${minutes} min). ${path.blurb}`,
     `/learn/paths/${path.slug}`
   );
 }

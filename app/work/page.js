@@ -7,7 +7,7 @@ import { clientSites, otherProjects, pageMeta } from "@/lib/site";
 
 export const metadata = pageMeta(
   "Our Work | GeoAI Case Studies & Client Sites",
-  "Case studies from I.STEM Lab: the Bidmytrip AI travel marketplace, Acoustical Ceiling Tile Solutions, food security monitoring in Karnali, satellite research and client websites.",
+  "I.STEM Lab case studies: the Bidmytrip AI travel marketplace, Acoustical Ceiling Tile Solutions, satellite imagery research and the businesses we run.",
   "/work"
 );
 

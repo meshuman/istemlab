@@ -3,7 +3,7 @@ import PageHero from "@/components/PageHero";
 import { SITE } from "@/lib/site";
 
 export const metadata = {
-  title: "Client Login | I.STEM Lab",
+  title: "Client Login",
   description: "The I.STEM Lab client portal is coming soon.",
   robots: { index: false, follow: false },
 };
