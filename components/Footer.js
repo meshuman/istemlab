@@ -12,14 +12,14 @@ export default function Footer() {
             Applied AI and geospatial intelligence, built to deliver. GeoAI,
             RAG and agents, 3D/VR, AI strategy and training.
           </p>
-          <a href={SITE.linkedin} target="_blank" rel="noreferrer" className="label mt-6 inline-block hover:text-white">
+          <a href={SITE.linkedin} target="_blank" rel="noreferrer" className="label mt-4 inline-block py-2 hover:text-white">
             LinkedIn ↗
           </a>
         </div>
 
         <div>
           <h4 className="label mb-4 text-white">Services</h4>
-          <ul className="space-y-2 text-sm">
+          <ul className="space-y-1 text-sm [&_a]:inline-block [&_a]:py-1.5">
             {services.map((s) => (
               <li key={s.slug}>
                 <Link href={`/services#${s.slug}`} className="hover:text-white">
@@ -32,7 +32,7 @@ export default function Footer() {
 
         <div>
           <h4 className="label mb-4 text-white">Company</h4>
-          <ul className="space-y-2 text-sm">
+          <ul className="space-y-1 text-sm [&_a]:inline-block [&_a]:py-1.5">
             <li><Link href="/about" className="hover:text-white">About us</Link></li>
             <li><Link href="/work" className="hover:text-white">Our work</Link></li>
             <li><Link href="/research" className="hover:text-white">Research</Link></li>
@@ -44,7 +44,7 @@ export default function Footer() {
 
         <div>
           <h4 className="label mb-4 text-white">Contact</h4>
-          <address className="space-y-2 text-sm not-italic">
+          <address className="space-y-1 text-sm not-italic [&_a]:inline-block [&_a]:py-1.5">
             <p><a href={`mailto:${SITE.email}`} className="hover:text-white">{SITE.email}</a></p>
             <p><a href={`tel:${SITE.phone}`} className="hover:text-white">{SITE.phoneDisplay}</a></p>
           </address>

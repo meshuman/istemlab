@@ -77,8 +77,9 @@ export default function Header() {
         </div>
 
         <button
-          className="lg:hidden"
+          className="-mr-2 flex h-11 w-11 items-center justify-center lg:hidden"
           aria-label="Toggle menu"
+          aria-expanded={open}
           onClick={() => setOpen(!open)}
         >
           <span className="text-2xl">{open ? "✕" : "☰"}</span>
@@ -97,7 +98,7 @@ export default function Header() {
                 key={l.href}
                 href={l.href}
                 onClick={() => setOpen(false)}
-                className="rounded px-2 py-2 text-sm font-medium hover:bg-soft"
+                className="rounded px-2 py-3 text-base font-medium hover:bg-soft"
               >
                 {l.label}
               </Link>

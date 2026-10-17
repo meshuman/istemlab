@@ -35,7 +35,7 @@ export default function Services() {
       <nav aria-label="Services" className="border-y border-hair">
         <div className="container-x flex flex-wrap gap-x-8 gap-y-2 py-4">
           {services.map((s) => (
-            <a key={s.slug} href={`#${s.slug}`} className="label text-muted hover:text-brand-ink">
+            <a key={s.slug} href={`#${s.slug}`} className="label py-2 text-muted hover:text-brand-ink">
               {s.icon} {s.title}
             </a>
           ))}

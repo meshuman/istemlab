@@ -4,7 +4,7 @@ export default function PageHero({ title, intro, crumbs = [] }) {
   return (
     <section className="bg-background py-16">
       <div className="container-x">
-        <nav aria-label="Breadcrumb" className="mb-4 text-sm text-muted">
+        <nav aria-label="Breadcrumb" className="mb-4 text-sm text-muted [&_a]:inline-block [&_a]:py-2">
           <Link href="/" className="hover:text-brand-ink">Home</Link>
           {crumbs.map((c) => (
             <span key={c}> / {c}</span>

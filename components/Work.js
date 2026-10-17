@@ -33,14 +33,14 @@ export default function Work({
         </div>
 
         {types.length > 1 && (
-        <div className="mt-10 flex gap-2" role="tablist" aria-label="Filter projects">
+        <div className="mt-10 flex flex-wrap gap-2" role="tablist" aria-label="Filter projects">
           {["All", ...types].map((t) => (
             <button
               key={t}
               role="tab"
               aria-selected={tab === t}
               onClick={() => setTab(t)}
-              className={`label px-4 py-2 ${
+              className={`label min-h-11 px-4 py-2 ${
                 tab === t ? "bg-brand text-white" : "bg-soft text-foreground hover:bg-silver/50"
               }`}
             >

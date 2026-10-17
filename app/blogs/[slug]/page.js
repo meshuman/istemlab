@@ -53,7 +53,7 @@ export default async function BlogPost({ params }) {
       />
       <article className="py-16">
         <header data-reveal suppressHydrationWarning className="container-x max-w-4xl">
-          <nav aria-label="Breadcrumb" className="label mb-6 text-muted">
+          <nav aria-label="Breadcrumb" className="label mb-6 text-muted [&_a]:inline-block [&_a]:py-2">
             <Link href="/" className="hover:text-brand-ink">Home</Link> /{" "}
             <Link href="/blogs" className="hover:text-brand-ink">Blog</Link> / {post.tag}
           </nav>
