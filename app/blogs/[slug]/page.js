@@ -7,6 +7,10 @@ import CTA from "@/components/CTA";
 import { SITE } from "@/lib/site";
 import { posts } from "@/lib/content";
 
+// Every valid address is prerendered at build time via generateStaticParams (unknown ones 404),
+// so these pages may block on navigation instead of streaming behind <Suspense>.
+export const instant = false;
+
 export function generateStaticParams() {
   return posts.map((p) => ({ slug: p.slug }));
 }
