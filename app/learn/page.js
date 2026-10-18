@@ -5,6 +5,7 @@ import CTA from "@/components/CTA";
 import { pageMeta } from "@/lib/site";
 import { learnItems, learnPaths, toCards, getType } from "@/lib/learn";
 import LearnSections from "@/components/LearnSections";
+import PathAccordion from "@/components/PathAccordion";
 
 export const metadata = pageMeta(
   "Learn GeoAI, RAG and AI: Free Guides and Tutorials",
@@ -42,12 +43,12 @@ export default function Learn() {
           </p>
           <div data-reveal-stagger suppressHydrationWarning className="mt-12 grid gap-6 lg:grid-cols-2">
             {learnPaths.map((p) => (
-              <div key={p.slug} className="flex flex-col border border-hair bg-background p-7">
-                <h3 className="text-xl"><Link href={`/learn/paths/${p.slug}`} className="hover:text-brand-ink">{p.title}</Link></h3>
-                <p className="label mt-2 text-[11px] text-brand-ink">
-                  {p.items.length} articles · {p.items.reduce((n, s) => n + (byId(s)?.minutes || 0), 0)} min in total
-                </p>
-                <p className="mt-3 text-[15px] text-muted">{p.blurb}</p>
+              <PathAccordion
+                key={p.slug}
+                title={p.title}
+                meta={`${p.items.length} articles · ${p.items.reduce((n, s) => n + (byId(s)?.minutes || 0), 0)} min in total`}
+              >
+                <p className="mt-1 text-[15px] text-muted lg:mt-3">{p.blurb}</p>
                 <p className="mt-2 text-[13px] text-muted">
                   <span className="font-medium text-foreground">Best for:</span> {p.audience}
                 </p>
@@ -76,7 +77,7 @@ export default function Learn() {
                 <Link href={`/learn/paths/${p.slug}`} className="btn btn-ghost mt-6 self-start">
                   View the full path
                 </Link>
-              </div>
+              </PathAccordion>
             ))}
           </div>
           <div className="mt-10">
