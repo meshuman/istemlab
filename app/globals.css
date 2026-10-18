@@ -126,11 +126,22 @@ main img {
   filter: grayscale(1);
   transition: filter .6s var(--ease-out-3), transform .7s var(--ease-out-3), opacity .3s var(--ease-out-3);
 }
-main img:hover,
-main a:hover img,
-main figure:hover img,
-main a:focus-visible img {
-  filter: none;
+/* Pointer devices: color on hover or keyboard focus. */
+@media (hover: hover) {
+  main img:hover,
+  main a:hover img,
+  main figure:hover img,
+  main a:focus-visible img {
+    filter: none;
+  }
+}
+/* Touch devices have no hover (and a tap would leave it "stuck"), so an image turns to color
+   while it sits in the middle band of the screen, set by RevealObserver, and fades back to
+   black and white as it scrolls away. */
+@media (hover: none) {
+  main img.in-focus {
+    filter: none;
+  }
 }
 
 /* FAQ accordion: plus/minus icon + smooth open (progressive: works without it) */

@@ -22,7 +22,21 @@ export default function RevealObserver() {
       { threshold: [0, 0.12], rootMargin: "0px 0px -6% 0px" }
     );
     els.forEach((el) => io.observe(el));
-    return () => io.disconnect();
+
+    // Touch screens: color the image(s) in the middle band of the viewport.
+    let focusIo;
+    if (window.matchMedia("(hover: none)").matches) {
+      focusIo = new IntersectionObserver(
+        (entries) => entries.forEach((e) => e.target.classList.toggle("in-focus", e.isIntersecting)),
+        { rootMargin: "-30% 0px -30% 0px", threshold: 0 }
+      );
+      document.querySelectorAll("main img").forEach((img) => focusIo.observe(img));
+    }
+
+    return () => {
+      io.disconnect();
+      focusIo?.disconnect();
+    };
   }, [pathname]);
 
   return null;
