@@ -8,7 +8,7 @@ import LearnSections from "@/components/LearnSections";
 import PathAccordion from "@/components/PathAccordion";
 
 export const metadata = pageMeta(
-  "Learn GeoAI, RAG and AI: Free Guides and Tutorials",
+  "Free GeoAI, RAG and AI Guides and Tutorials",
   "Free learning material from I.STEM Lab: plain-language concepts, hands-on tutorials and practical guides on GeoAI, RAG, AI agents and AI adoption.",
   "/learn"
 );

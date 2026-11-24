@@ -5,7 +5,7 @@ import { pageMeta } from "@/lib/site";
 import { learnPaths, pathItems, pathStats } from "@/lib/learn";
 
 export const metadata = pageMeta(
-  "Learning Paths | GeoAI, RAG, AI Adoption, 3D & VR",
+  "Learning Paths for GeoAI, RAG and 3D/VR",
   "Seven free, step-by-step learning paths: GeoAI, applied maths, tech jargon, the science behind AI, RAG assistants, adopting AI, and 3D, VR and AR.",
   "/learn/paths"
 );

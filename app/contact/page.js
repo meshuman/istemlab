@@ -7,7 +7,7 @@ import SocialLinks from "@/components/SocialIcons";
 import { pageMeta, services, SITE } from "@/lib/site";
 
 export const metadata = pageMeta(
-  "Contact I.STEM Lab | Book a Free Discovery Call",
+  "Contact | Book a Free Discovery Call",
   "Book a free 30-minute discovery call about GeoAI, AI strategy and training, RAG and agents, 3D/VR or incubation. We reply within two business days.",
   "/contact"
 );

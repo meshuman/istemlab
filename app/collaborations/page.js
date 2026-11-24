@@ -5,7 +5,7 @@ import CTA from "@/components/CTA";
 import { pageMeta } from "@/lib/site";
 
 export const metadata = pageMeta(
-  "Collaborations | Partners & Research Institutions",
+  "Partners & Research Collaborations",
   "I.STEM Lab collaborates with universities, research institutes, development agencies and companies on GeoAI research, grant proposals, pilots and training.",
   "/collaborations"
 );

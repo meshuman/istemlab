@@ -8,7 +8,7 @@ import { differentiators, pageMeta } from "@/lib/site";
 import { values } from "@/lib/content";
 
 export const metadata = pageMeta(
-  "About I.STEM Lab | Applied AI & Geospatial Engineers",
+  "About Us | Applied AI & Geospatial Engineers",
   "I.STEM Lab is an applied AI and geospatial engineering studio with a team based in Nepal, focused on AI that delivers real outcomes.",
   "/about"
 );

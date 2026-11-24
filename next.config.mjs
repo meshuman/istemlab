@@ -41,6 +41,8 @@ const nextConfig = {
   partialPrefetching: true,
   async redirects() {
     return [
+      // One canonical host: send www to the apex domain so the two never compete in search.
+      { source: "/:path*", has: [{ type: "host", value: "www.istemlab.ai" }], destination: "https://istemlab.ai/:path*", permanent: true },
       { source: "/learn/experiences/start-with-the-decision-not-the-dashboard", destination: "/learn/experiences", permanent: true },
       { source: "/experiences/start-with-the-decision-not-the-dashboard", destination: "/learn/experiences", permanent: true },
       { source: "/learn/experiences/scoping-a-marketplace-mvp", destination: "/learn/experiences", permanent: true },

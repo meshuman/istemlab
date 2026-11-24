@@ -3,7 +3,7 @@ import { pageMeta, SITE } from "@/lib/site";
 import { perks } from "@/lib/content";
 
 export const metadata = pageMeta(
-  "Careers at I.STEM Lab",
+  "Careers | GeoAI, RAG and 3D/VR Work",
   "I.STEM Lab has no open roles right now. Send your CV and portfolio to be considered for future work in GeoAI, RAG and agents, 3D/VR and AI strategy.",
   "/careers"
 );

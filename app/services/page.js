@@ -27,7 +27,7 @@ const relatedLinks = (slug) => {
 };
 
 export const metadata = pageMeta(
-  "AI & GeoAI Services: Strategy, RAG, Agents, 3D/VR",
+  "AI & GeoAI Services: RAG, Agents, 3D/VR",
   "GeoAI, AI strategy and training, RAG and autonomous agents, 3D/VR and mixed reality, and business incubation. Scoped, low-risk engagements from I.STEM Lab.",
   "/services"
 );
